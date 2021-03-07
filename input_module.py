@@ -1,4 +1,4 @@
 
 def take_input():
-    i = input('ne:')
+    i = input('me:')
     return i
