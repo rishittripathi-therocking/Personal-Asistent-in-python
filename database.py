@@ -31,3 +31,5 @@ def insert_question_and_answer(question,answer):
     mycol = mydb.questions
     mydict = {question:answer}
     mycol.insert_one(mydict)
+
+#insert_question_and_answer("check internet connection","check internet connection")
