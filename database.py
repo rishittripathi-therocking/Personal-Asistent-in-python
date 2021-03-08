@@ -24,3 +24,10 @@ def get_answer_from_memory(question):
             if temp_key == temp_question:
                 answer = questioninRow[key] 
     return answer
+
+def insert_question_and_answer(question,answer):
+    myclient = create_connection()
+    mydb = myclient.memory
+    mycol = mydb.questions
+    mydict = {question:answer}
+    mycol.insert_one(mydict)
