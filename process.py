@@ -2,10 +2,15 @@ from output_module import output
 from time_module import get_time
 from database import get_answer_from_memory, insert_question_and_answer
 from input_module import take_input
-from internet import check_internet_connection
+from internet import check_internet_connection, check_on_wiki
 
 def processes(query):
     answer = get_answer_from_memory(query)
+    if answer == "":
+        answer = check_on_wiki(query)
+        if answer != "":
+            return answer 
+
     if answer == "Get The Time":
         return ("Time is " + get_time())
     elif answer == "check internet connection":
