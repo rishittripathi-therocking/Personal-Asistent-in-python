@@ -74,3 +74,5 @@ def get_date():
     return [x['date'] for x in memoryofassistent if "date" in x][0]
 
 
+
+
