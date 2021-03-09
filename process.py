@@ -1,8 +1,9 @@
 from output_module import output
 from time_module import get_time
-from database import get_answer_from_memory, insert_question_and_answer
+from database import get_answer_from_memory, insert_question_and_answer,update_name
 from input_module import take_input
 from internet import check_internet_connection, check_on_wiki
+import assistant_details
 
 def processes(query):
     answer = get_answer_from_memory(query)
@@ -13,11 +14,23 @@ def processes(query):
 
     if answer == "Get The Time":
         return ("Time is " + get_time())
+    
     elif answer == "check internet connection":
         if check_internet_connection():
             return "internet is connected"
         else:
             return "internet is not connected"
+    
+    elif answer == "change name":
+        output("Okay! What do you want to call me")
+        temp = take_input()
+        if temp == assistant_details.name:
+            return "Can't change. It is my previous Name Sorry"
+        else:
+            update_name(temp)
+            assistant_details.name = temp
+            return "Now You can call me " + temp
+
     else:
         output("I don't know this one, can you please tell me what is means?")
         ans = take_input()

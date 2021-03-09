@@ -1,4 +1,4 @@
-from assistant_details import name 
+import assistant_details 
 def output(o):
-    print(name+':'+o)
+    print(assistant_details.name+':'+o)
     print()
