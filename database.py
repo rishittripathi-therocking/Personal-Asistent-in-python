@@ -1,4 +1,5 @@
 import pymongo
+from time_module import get_date_today
 
 def create_connection():
     myclient = pymongo.MongoClient("mongodb://localhost:27017/")
@@ -39,12 +40,37 @@ def get_name():
     con = create_connection()
     db = con.memory
     memoryofassistent = list(db.memoryofassistent.find({}))
-    return memoryofassistent[0]['assistant_name']
+    return [x['assistant_name'] for x in memoryofassistent if "assistant_name" in x][0]
 
 def update_name(new_name):
     myclient = create_connection()
     mydb = myclient.memory
     mycol = mydb.memoryofassistent
     mydict = {"$set":{"assistant_name":new_name}}
-    mycol.update_one({"_id":list(mycol.find({}))[0]["_id"]},mydict)
+    mylist = list(mycol.find({}))
+    p = [x['_id'] for x in mylist if "assistant_name" in x]
+    mycol.update_one({"_id": p[0]},mydict)
+
+def insert_date(key,date):
+    myclient = create_connection()
+    mydb = myclient.memory
+    mycol = mydb.memoryofassistent
+    mydict = {key:date}
+    mycol.insert_one(mydict)
+
+def update_date(date):
+    myclient = create_connection()
+    mydb = myclient.memory
+    mycol = mydb.memoryofassistent
+    mydict = {"$set":{"date":date}}
+    mylist = list(mycol.find({}))
+    p = [x['_id'] for x in mylist if "date" in x]
+    mycol.update_one({"_id": p[0]},mydict)
+
+def get_date():
+    con = create_connection()
+    db = con.memory
+    memoryofassistent = list(db.memoryofassistent.find({}))
+    return [x['date'] for x in memoryofassistent if "date" in x][0]
+
 
