@@ -1,5 +1,7 @@
 import pymongo
 from time_module import get_date_today
+from internet import check_internet_connection
+
 
 def create_connection():
     myclient = pymongo.MongoClient("mongodb://localhost:27017/")
@@ -73,6 +75,33 @@ def get_date():
     memoryofassistent = list(db.memoryofassistent.find({}))
     return [x['date'] for x in memoryofassistent if "date" in x][0]
 
+def update_speech(status):
+    if status == "on":
+        if check_internet_connection():
+            myclient = create_connection()
+            mydb = myclient.memory
+            mycol = mydb.memoryofassistent
+            mydict = {"$set":{"speech":status}}
+            mylist = list(mycol.find({}))
+            p = [x['_id'] for x in mylist if "speech" in x]
+            mycol.update_one({"_id": p[0]},mydict)
+            return ("My Speeking ability is turned on now")
+        else:
+            return ("Hey! Please turn on your internet First")
 
+    elif status =="off":
+        myclient = create_connection()
+        mydb = myclient.memory
+        mycol = mydb.memoryofassistent
+        mydict = {"$set":{"speech":status}}
+        mylist = list(mycol.find({}))
+        p = [x['_id'] for x in mylist if "speech" in x]
+        mycol.update_one({"_id": p[0]},mydict)
+        return ("My Speeking ability is turned off now")
 
+def get_speak():
+    con = create_connection()
+    db = con.memory
+    memoryofassistent = list(db.memoryofassistent.find({}))
+    return [x['speech'] for x in memoryofassistent if "speech" in x][0]
 
