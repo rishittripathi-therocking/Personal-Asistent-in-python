@@ -7,6 +7,7 @@ import assistant_details
 from web import open_facebook,open_google,open_youtube
 from music import play_music,pause_music,stop_music,next_song,previous_song,play_specific_song
 from display import change_wallpaper
+from news import get_news
 
 def processes(query):
     answer = get_answer_from_memory(query)
@@ -65,6 +66,9 @@ def processes(query):
         song = take_input()
         song = song.lower()
         return play_specific_song(song)
+    
+    elif answer == 'get news':
+        return get_news()
         
     elif answer == 'change wallpaper':
         change_wallpaper()
