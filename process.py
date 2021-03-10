@@ -5,6 +5,7 @@ from input_module import take_input
 from internet import check_internet_connection, check_on_wiki
 import assistant_details
 from web import open_facebook,open_google
+from music import play_music,pause_music,stop_music,next_song,previous_song
 
 def processes(query):
     answer = get_answer_from_memory(query)
@@ -38,6 +39,21 @@ def processes(query):
     elif answer == 'open browser':
         open_google()
         return "I am going to open Browser Now"
+    
+    elif answer == 'play music':
+        return play_music()
+    
+    elif answer == 'pause music':
+        return pause_music()
+
+    elif answer == 'stop music':
+        return stop_music()
+
+    elif answer == 'play next song':
+        return next_song()
+    
+    elif answer == 'play previous song':
+        return previous_song()
 
     elif answer == "change name":
         output("Okay! What do you want to call me")
