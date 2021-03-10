@@ -104,4 +104,5 @@ def get_speak():
     db = con.memory
     memoryofassistent = list(db.memoryofassistent.find({}))
     return [x['speech'] for x in memoryofassistent if "speech" in x][0]
+    
 
