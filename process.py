@@ -4,6 +4,7 @@ from database import *
 from input_module import take_input
 from internet import check_internet_connection, check_on_wiki
 import assistant_details
+from web import open_facebook,open_google
 
 def processes(query):
     answer = get_answer_from_memory(query)
@@ -25,6 +26,18 @@ def processes(query):
 
     elif answer == "off speak":
         return update_speech("off")
+    
+    elif answer == 'open facebook':
+        open_facebook()
+        return "I am going to open Facebook Now"
+    
+    elif answer == 'open google':
+        open_google()
+        return "I am going to open Google Now"
+    
+    elif answer == 'open browser':
+        open_google()
+        return "I am going to open Browser Now"
 
     elif answer == "change name":
         output("Okay! What do you want to call me")
