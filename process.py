@@ -6,6 +6,7 @@ from internet import check_internet_connection, check_on_wiki
 import assistant_details
 from web import open_facebook,open_google,open_youtube
 from music import play_music,pause_music,stop_music,next_song,previous_song,play_specific_song
+from display import change_wallpaper
 
 def processes(query):
     answer = get_answer_from_memory(query)
@@ -65,6 +66,9 @@ def processes(query):
         song = song.lower()
         return play_specific_song(song)
         
+    elif answer == 'change wallpaper':
+        change_wallpaper()
+        return "Wall Paper Changed"
 
     elif answer == "change name":
         output("Okay! What do you want to call me")
