@@ -7,7 +7,7 @@ def get_news():
         query_params = {
         "source": "bbc-news",
         "sortBy": "top",
-        "apiKey": "API KEY"
+        "apiKey": "API KEY "
         }
         main_url = " https://newsapi.org/v1/articles"
         res = requests.get(main_url, params=query_params)
