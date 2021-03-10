@@ -5,7 +5,7 @@ from input_module import take_input
 from internet import check_internet_connection, check_on_wiki
 import assistant_details
 from web import open_facebook,open_google,open_youtube
-from music import play_music,pause_music,stop_music,next_song,previous_song
+from music import play_music,pause_music,stop_music,next_song,previous_song,play_specific_song
 
 def processes(query):
     answer = get_answer_from_memory(query)
@@ -58,6 +58,13 @@ def processes(query):
     elif answer == 'open youtube':
         open_youtube()
         return 'Opening youtube now'
+    
+    elif answer == 'play specific song':
+        output("Enter Song Name")
+        song = take_input()
+        song = song.lower()
+        return play_specific_song(song)
+        
 
     elif answer == "change name":
         output("Okay! What do you want to call me")
