@@ -4,7 +4,7 @@ from database import *
 from input_module import take_input
 from internet import check_internet_connection, check_on_wiki
 import assistant_details
-from web import open_facebook,open_google,open_youtube,search_query_on_google
+from web import open_facebook,open_google,open_youtube,search_query_on_google,search_query_on_youtube,open_browser
 from music import play_music,pause_music,stop_music,next_song,previous_song,play_specific_song
 from display import change_wallpaper
 from news import get_news
@@ -31,24 +31,34 @@ def processes(query):
         return update_speech("off")
     
     elif answer == 'open facebook':
-        open_facebook()
-        return "I am going to open Facebook Now"
+        if check_internet_connection():
+            open_facebook()
+            return "I am going to open Facebook Now"
+        else:
+            return "Turn Your Internet on First"
     
     elif answer == 'open google':
-        open_google()
-        return "I am going to open Google Now"
+        if check_internet_connection():
+            open_google()
+            return "I am going to open Google Now"
+        else:
+            return "Turn Your Internet on First"
     
     elif answer == 'open browser':
-        open_google()
+        open_browser()
         return "I am going to open Browser Now"
     
     elif answer == 'play music':
         return play_music()
     
     elif answer == 'search on browser':
-        search_string = take_input()
-        search_query_on_google(search_string)
-        return "Searching on google"
+        if check_internet_connection():
+            search_string = take_input()
+            search_query_on_google(search_string)
+            return "Searching on google"
+        else:
+            return "Turn Your Internet on First"
+
     
     elif answer == 'pause music':
         return pause_music()
@@ -63,8 +73,19 @@ def processes(query):
         return previous_song()
     
     elif answer == 'open youtube':
-        open_youtube()
-        return 'Opening youtube now'
+        if check_internet_connection():
+            open_youtube()
+            return 'Opening youtube now'
+        else:
+            return "Turn Your Internet on First"
+    
+    elif answer == 'search on youtube':
+        if check_internet_connection():
+            search_string = take_input()
+            search_query_on_youtube(search_string)
+            return "Searching on youtube"
+        else:
+            return "Turn Your Internet on First"
     
     elif answer == 'play specific song':
         output("Enter Song Name")
