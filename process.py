@@ -4,7 +4,7 @@ from database import *
 from input_module import take_input
 from internet import check_internet_connection, check_on_wiki
 import assistant_details
-from web import open_facebook,open_google,open_youtube
+from web import open_facebook,open_google,open_youtube,search_query_on_google
 from music import play_music,pause_music,stop_music,next_song,previous_song,play_specific_song
 from display import change_wallpaper
 from news import get_news
@@ -44,6 +44,11 @@ def processes(query):
     
     elif answer == 'play music':
         return play_music()
+    
+    elif answer == 'search on browser':
+        search_string = take_input()
+        search_query_on_google(search_string)
+        return "Searching on google"
     
     elif answer == 'pause music':
         return pause_music()
